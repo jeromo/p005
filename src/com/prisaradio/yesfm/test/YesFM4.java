@@ -23,7 +23,7 @@ public class YesFM4 extends YesFM {
 		
 		UiSelector selector = new UiSelector();
 		UiObject object = new UiObject(selector.className("android.support.v4.view.ViewPager").instance(0));
-		assertTrue("No encuentra ViewPager de Primera Radio", object.exists());
+		assertTrue("No encuentra ViewPager de la Primera Radio", object.exists());
 		
 		object = object.getChild(selector.className("android.widget.FrameLayout")); 
 		assertTrue("No encuentra FrameLayout de Primera Radio", object.exists());
