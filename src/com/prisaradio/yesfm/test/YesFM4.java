@@ -7,19 +7,31 @@ import com.android.uiautomator.core.UiScrollable;
 import com.android.uiautomator.core.UiSelector;
 
 public class YesFM4 extends YesFM {
+	private String Radio;
 	/*
 	 * Comprobar que tiene imagen, nombre, descripción, creada por, botón de me gusta, Botón de play, Botón de opciones
 	 * numero de escuchas, numero de canciones, duración
-	 * Artistas:imagen, texto, opciones
+	 * Canciones:imagen, texto, opciones
 	 */
+	private void descargar(String Radio, UiObject object) throws UiObjectNotFoundException {
+		this.Radio = Radio;
+
+		object.clickAndWaitForNewWindow();
+		
+		object = new UiObject(new UiSelector().text("Descargar"));
+		assertTrue("No encuentra Descargar", object.exists());
+		object.click();
+	}
+	
+	private void comprobarDescargaRadio() throws UiObjectNotFoundException {
+//		pulsarMenu("Sin Conexión")
+	}
 	public void test01RadiosCompleta() throws UiObjectNotFoundException {
+		String tituloRadio;
+		
 		loginPremium();
 		sleep(6000L);
 
-		
-		/* Coger la primera radio
-		 * Primero, encontrar ViewPager, instance 0, FrameLayout -> RelativeLayout. ImageView instance 2
-		 */
 		
 		UiSelector selector = new UiSelector();
 		UiObject object = new UiObject(selector.className("android.support.v4.view.ViewPager").instance(0));
@@ -39,6 +51,16 @@ public class YesFM4 extends YesFM {
 		
 		//Ya estoy en la pantalla de la radio
 		System.out.println("Estoy en la primera Radio"); System.out.flush();
+		
+		//Primero, recorrerse las canciones
+		UiScrollable canciones = new UiScrollable(new UiSelector().className("android.support.v4.view.ViewPager"));
+		while (canciones.scrollForward())
+			;
+		
+		/*Ahora, recorrerse los campos de la radio,y guardarla 
+		 * Primero, encontrar ViewPager, instance 0, FrameLayout -> RelativeLayout. ImageView instance 2
+		 */
+		
 		selector = new UiSelector();
 		object = new UiObject(selector.className("android.view.View").instance(0));
 		assertTrue("No encuentra View de Primera Radio", object.exists());
@@ -56,7 +78,8 @@ public class YesFM4 extends YesFM {
 		object = objectRelativeLayoutSon.getChild(selector.className("android.widget.TextView")); 
 		assertTrue("No encuentra título de Primera Radio", object.exists());
 		System.out.println("El título es " + object.getText()); System.out.flush();
-		
+		tituloRadio = object.getText();
+
 		objectRelativeLayoutSon = objectRelativeLayoutParent.getChild(selector.className("android.widget.RelativeLayout").instance(1)); 
 		assertTrue("No encuentra RelativeLayout Hijo segundo de Primera Radio", objectRelativeLayoutSon.exists());
 
@@ -73,19 +96,18 @@ public class YesFM4 extends YesFM {
 		// Botones Botón de Me gusta, Botón de play, Botón de opciones 
 		object = objectRelativeLayoutSon.getChild(selector.className("android.widget.ImageButton").description("Botón de Me gusta")); 
 		assertTrue("No encuentra Botón de Me gusta", object.exists());
+		
 		object = objectRelativeLayoutSon.getChild(selector.className("android.widget.ImageButton").description("Botón de play")); 
 		assertTrue("No encuentra Botón de play", object.exists());
 		object = objectRelativeLayoutSon.getChild(selector.className("android.widget.ImageButton").description("Botón de opciones")); 
 		assertTrue("No encuentra Botón de opciones", object.exists());
-		
-		
-		//Ahora, recorrerse las canciones
-		UiScrollable canciones = new UiScrollable(new UiSelector().className("android.support.v4.view.ViewPager"));
-		while (canciones.scrollForward())
-			;
+		//Dar a descargar
+		descargar(tituloRadio, object);
+
 		getUiDevice().pressBack();
 		sleep(4000L);
-		logout();
+		comprobarDescargaRadio();
+//		logout();
 		sleep(4000L);
 	}
 
