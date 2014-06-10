@@ -7,7 +7,6 @@ import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.core.UiScrollable;
 import com.android.uiautomator.core.UiSelector;
-import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class YesFM2 extends YesFM {
 	public void test01Novedades() throws UiObjectNotFoundException {

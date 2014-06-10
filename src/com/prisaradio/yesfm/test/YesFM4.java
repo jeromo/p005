@@ -1,6 +1,5 @@
 package com.prisaradio.yesfm.test;
 
-import com.android.uiautomator.core.UiCollection;	
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.core.UiScrollable;

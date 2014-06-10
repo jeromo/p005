@@ -7,7 +7,6 @@ import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.core.UiScrollable;
 import com.android.uiautomator.core.UiSelector;
-import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class YesFM1 extends YesFM {
 
@@ -66,7 +65,6 @@ public class YesFM1 extends YesFM {
 
 			UiObject objectRelativeLayout;
 
-			int j;
 			UiObject objectLinearLayout;
 			//Recorrer cada LinearLayout
 			for (int i = 0; i < numberLinearLayout; i++)
