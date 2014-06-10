@@ -115,7 +115,23 @@ public class YesFM extends UiAutomatorTestCase {
 		getUiDevice().pressBack();
 		sleep(4000L);
 	}
+	protected void pulsarMenu(String text) throws UiObjectNotFoundException {
+		sleep(4000L);
+		UiObject menuButton = new UiObject(new UiSelector().className(
+				"android.widget.ImageButton").descriptionContains(
+				"Botón de menú"));
+		assertTrue("No encuentra Botón de menú", menuButton.exists());
 
+		menuButton.clickAndWaitForNewWindow();
+
+		UiScrollable textViews = new UiScrollable(new UiSelector());
+
+		UiObject object = textViews.getChildByText(new UiSelector()
+		.className(android.widget.TextView.class.getName()), text, true);
+		assertTrue("No encuentra " + text, object.exists());
+		object.clickAndWaitForNewWindow();
+	}
+	
 	protected void comprobarSeccion(String textViewOrigin,
 			String textViewAuxiliar, String containsTextView)
 			throws UiObjectNotFoundException {

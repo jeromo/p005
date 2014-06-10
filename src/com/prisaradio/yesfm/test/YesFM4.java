@@ -7,14 +7,14 @@ import com.android.uiautomator.core.UiScrollable;
 import com.android.uiautomator.core.UiSelector;
 
 public class YesFM4 extends YesFM {
-	private String Radio;
+	private String radio;
 	/*
 	 * Comprobar que tiene imagen, nombre, descripción, creada por, botón de me gusta, Botón de play, Botón de opciones
 	 * numero de escuchas, numero de canciones, duración
 	 * Canciones:imagen, texto, opciones
 	 */
-	private void descargar(String Radio, UiObject object) throws UiObjectNotFoundException {
-		this.Radio = Radio;
+	private void descargar(String radio, UiObject object) throws UiObjectNotFoundException {
+		this.radio = radio;
 
 		object.clickAndWaitForNewWindow();
 		
@@ -24,7 +24,24 @@ public class YesFM4 extends YesFM {
 	}
 	
 	private void comprobarDescargaRadio() throws UiObjectNotFoundException {
-//		pulsarMenu("Sin Conexión")
+		/*
+		 * 	Ir a Sin conexión y buscar la radio previamente descargada, cuyo nombre está en this.Radio
+		 * 
+		 */
+		System.out.println("Antes de pulsarMenú Sin Conexión"); System.out.flush();
+		this.pulsarMenu("Sin Conexión");
+		System.out.println("Despues de pulsarMenú Sin Conexión"); System.out.flush();
+		UiObject object = new UiObject(new UiSelector().text(this.radio));
+		assertTrue("No encuentra " +this.radio, object.exists());
+		object.click();
+		/*
+		 * Ver si alguna de las canciones ha cargado
+		 */
+		sleep(10000L);
+		
+		
+		
+		
 	}
 	public void test01RadiosCompleta() throws UiObjectNotFoundException {
 		String tituloRadio;
